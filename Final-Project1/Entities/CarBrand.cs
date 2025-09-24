@@ -34,6 +34,6 @@ namespace Final_Project1.Entities
 
         [ValidateNever]
         public ICollection<CarDetail> CarDetails { get; set; }
-
+        //Deneme
     }
 }
