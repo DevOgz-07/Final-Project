@@ -1,0 +1,78 @@
+﻿@model Slide
+
+<div class="right_col" role="main">
+
+
+    <div class="">
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Slayt Güncelle </h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                      
+                        <form enctype="multipart/form-data" class="form-horizontal form-label-left" asp-controller="Slide" asp-action="Edit" method="post">
+                            @Html.AntiForgeryToken()
+                            <input asp-for="@Model.Id" type="hidden" />
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.Title">
+
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" asp-for="@Model.Title">
+                                    <span asp-validation-for="@Model.Title"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.Description">
+
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" asp-for="@Model.Description">
+                                    <span asp-validation-for="@Model.Description"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.PictureUrl">
+
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" name="picture" type="file">
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.DisplayIndex">
+
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" asp-for="@Model.DisplayIndex">
+                                    <span asp-validation-for="@Model.DisplayIndex"></span>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <a class="btn btn-primary" asp-controller="Slide" asp-action="Index">İptal</a>
+                                    <button class="btn btn-primary" type="reset">Reset</button>
+                                    <button type="submit" class="btn btn-success">Güncelle</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

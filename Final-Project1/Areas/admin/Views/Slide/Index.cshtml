@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Slide>
+
+<div class="right_col" role="main">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Slayt Yönetimi</h2>
+                <a class="btn btn-success navbar-right" asp-controller="Slide" asp-action="New">Yeni Slayt</a>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+
+
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+
+                                <th class="column-title">Başlık </th>
+                                <th class="column-title">Açıklama </th>
+                                <th class="column-title">Resim Dosya Yolu </th>
+                                <th class="column-title">Görünürlük Sırası</th>
+                                <th class="column-title">İşlemler</th>
+
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (Slide m in Model)
+                            {
+                                <tr class="even pointer">
+
+                                    <td class=" ">@m.Title</td>
+                                    <td class=" ">@m.Description</td>
+                                    <td class=" ">@m.PictureUrl</td>
+                                    <td class=" ">@m.DisplayIndex</td>
+                                    <td>
+                                        <a class="btn btn-info" asp-controller="Slide" asp-action="Edit" asp-route-id="@m.Id">Düzenle</a>
+                                        <a class="btn btn-danger" asp-controller="Slide" asp-action="Delete" asp-route-id="@m.Id">Sil</a>
+                                    </td>
+
+                                </tr>
+
+                             }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

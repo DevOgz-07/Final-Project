@@ -1,0 +1,68 @@
+﻿@model BrandVM
+
+<div class="right_col" role="main">
+
+
+    <div class="">
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Marka Düzenle</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form class="form-horizontal form-label-left" asp-controller="CarBrand" asp-action="Edit" method="post">
+                            @Html.AntiForgeryToken()
+                            <input asp-for="@Model.CarBrand.Id" type="hidden" />
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.CarBrand.Name">
+
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" asp-for="@Model.CarBrand.Name">
+                                    <span asp-validation-for="@Model.CarBrand.Name"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.CarBrand.ParentId">
+
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" asp-for="@Model.CarBrand.ParentId" asp-items="@Model.Brands.Select(x=> new SelectListItem { Text=x.Name,Value=x.Id.ToString()})">
+                                        <option value="">Araçın Markasını Seçin</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.CarBrand.ParentId"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.Pictures">
+
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" name="picture" type="file">
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <a class="btn btn-primary" asp-controller="CarBrand" asp-action="Index">İptal</a>
+                                    <button class="btn btn-primary" type="reset">Reset</button>
+                                    <button type="submit" class="btn btn-success">Güncelle</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

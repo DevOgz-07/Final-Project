@@ -1,0 +1,201 @@
+﻿@model CarVM
+    <style>
+        .custom-modal {
+    display:none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+            background-color:black;
+            
+        }
+
+        .custom-modal .modal-content-img {
+            display: block;
+            margin: auto;
+            max-width: 90%;
+            max-height: 80%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            font-size: 40px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10000;
+            user-select: none;
+            transform: translateY(-50%);
+        }
+
+            .nav-arrow.left {
+                left: 20px;
+            }
+
+            .nav-arrow.right {
+                right: 20px;
+            }
+    </style>
+
+    <div class="contact-form-container">
+
+        <div class="property-title"></div>
+
+
+
+        <div class="row">
+            <!-- Sol: Galeri -->
+            <div class="col-md-6 image-gallery">
+                <a  data-lightbox="main-image" onclick="openModal(@Model.Pictures.FirstOrDefault().ImagePath)">
+                    <img src="@Model.Pictures.FirstOrDefault().ImagePath" 
+                         class="main-img img-responsive" 
+                         alt="İlan Görseli" 
+                         style="width: 100%; height: auto; cursor:pointer;" 
+                          onclick="openCustomModal(this)"
+                          data-lightbox="car-gallery"
+                        data-index="0"
+                        data-image="@Model.Pictures.FirstOrDefault().ImagePath"
+                         />
+                </a>
+
+                <div class="row thumbnail-container" style="margin-top:10px;">
+
+                    @for (int i = 1; i < Model.Pictures.Count(); i++)
+                    {
+                        <div class="col-xs-3" style="padding: 5px;">
+                            @{var path = Model.Pictures.ElementAt(i).ImagePath;
+                            }
+                            <img class="img-thumbnail"
+                                 data-lightbox="car-gallery"
+                                 src="@path"
+                                 data-index="@i"
+                                 data-image="@path"
+                                 onclick="openCustomModal(this)"
+                                 style="width: 100%; height: 100px;  object-fit: cover; cursor: pointer;" />
+                            </div>
+                     }
+
+                        </div>
+
+                    </div>
+
+            <!-- Tam ekran modal -->
+            <div id="customModal" class="custom-modal">
+                <span class="close-btn" onclick="closeCustomModal()">×</span>
+
+                <!-- Sol ok -->
+                <div class="nav-arrow left" onclick="prevImage()">&#10094;</div>
+
+                <!-- Büyük resim -->
+                <img id="customModalImage" src="" class="modal-content-img" />
+
+                <!-- Sağ ok -->
+                <div class="nav-arrow right" onclick="nextImage()">&#10095;</div>
+            </div>
+
+
+
+            @{
+                var carDetails = new List<(string Label, string Value)>
+                {
+                 ("Marka", Model.Detail.CarBrand.ParentId != null ? Model.Detail.CarBrand.ParentBrand.Name : "-"),
+                 ("Model", Model.Detail.CarBrand.Name ?? "-"),
+                 ("Model Yılı", Model.Detail.CarYear.ToString()),
+                 ("Kilometre", Model.Detail.CarKilometer.ToString("N0")),
+                 ("Renk", Model.Detail.CarColor),
+                 ("Açıklama", Model.Detail.Description),
+
+           };
+            }
+
+            <div class="col-md-6">
+                <div class="price-tag">@Model.Detail.DailyPrice.ToString("N2")₺</div>
+                <div class="property-info"><strong>Konum:</strong> İstanbul / Eyüp / Vialand </div>
+
+                <table class="table table-bordered details-table">
+                    <tbody>
+                        @foreach (var detail in carDetails)
+                        {
+                            <tr>
+                                <td><strong>@detail.Label</strong></td>
+                                <td>@detail.Value</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <div>
+                    <p><a asp-controller="Car" asp-action="Detail" class="btn btn-primary" role="button">Rezervazyon Yap</a></p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    @section OzelScriptlerim {
+        <script>
+            let currentIndex = 0;
+            let thumbnails = [];
+
+            document.addEventListener('DOMContentLoaded', function () {
+                thumbnails = Array.from(document.querySelectorAll('.thumbnail-container img'));
+            });
+
+            function openCustomModal(imgElement) {
+                currentIndex = parseInt(imgElement.getAttribute('data-index'));
+                updateCustomModalImage();
+                document.getElementById("customModal").style.display = "block";
+            }
+
+            function closeCustomModal() {
+                document.getElementById("customModal").style.display = "none";
+            }
+
+            function updateCustomModalImage() {
+                const imagePath = thumbnails[currentIndex].getAttribute('data-image');
+                document.getElementById("customModalImage").src = imagePath;
+            }
+
+            function prevImage() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCustomModalImage();
+                }
+            }
+
+            function nextImage() {
+                if (currentIndex < thumbnails.length - 1) {
+                    currentIndex++;
+                    updateCustomModalImage();
+                }
+            }
+
+            // Modalı escape tuşu ile kapatmak için:
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeCustomModal();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'ArrowRight') nextImage();
+            });
+        </script>
+    }

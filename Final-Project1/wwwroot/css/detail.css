@@ -1,0 +1,44 @@
+﻿.property-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background-color:lightgray;
+}
+
+.price-tag {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.property-info {
+    margin-bottom: 10px;
+}
+
+.image-gallery {
+    margin-bottom: 20px;
+}
+
+.thumbnail-img {
+    height: 60px;
+    object-fit: cover;
+}
+
+.main-img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+.details-table {
+    margin-top: 20px;
+}
+
+    .details-table td {
+        padding: 8px;
+    }
+
+    .details-table tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }

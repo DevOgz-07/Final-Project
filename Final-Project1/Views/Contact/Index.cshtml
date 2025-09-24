@@ -1,0 +1,98 @@
+﻿<div class="contact-form-container">
+    <h2 class="contact-title">Contact Us</h2>
+    <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Drbi accumsan ipsum velit.</p>
+    <form action="#" method="post" class="tm-contact-form">
+        <div class="col-lg-5 col-md-5 contact-form-left">
+            <div class="form-group">
+                <input type="text" id="contact_name" class="form-control" placeholder="NAME" />
+            </div>
+            <div class="form-group">
+                <input type="email" id="contact_email" class="form-control" placeholder="EMAIL" />
+            </div>
+            <div class="form-group">
+                <input type="text" id="contact_subject" class="form-control" placeholder="SUBJECT" />
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-7 contact-form-right">
+            <div class="form-group margin-bottom-0">
+                <textarea id="contact_message" class="form-control" rows="6" placeholder="MESSAGE"></textarea>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 submit-btn-container">
+            <button type="submit" name="submit" class="btn text-uppercase templatemo-submit-btn">Send Message</button>
+        </div>
+    </form>
+</div>
+<style>
+    .contact-form-container {
+  max-width: 900px;
+  height: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.contact-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.contact-form-left, .contact-form-right {
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.contact-form-left {
+  float: left;
+  width: 45%;
+}
+
+.contact-form-right {
+  float: right;
+  width: 50%;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.submit-btn-container {
+  clear: both;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.templatemo-submit-btn {
+  background-color: #d9534f; 
+  border: none;
+  padding: 12px 30px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.templatemo-submit-btn:hover {
+  background-color: #c9302c;
+}
+
+</style>

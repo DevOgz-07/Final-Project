@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CarBrand>
+
+<div class="right_col" role="main">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        @if (TempData["errorMessage"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["errorMessage"]
+            </div>
+        }
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Marka Yönetimi</h2>
+                <a class="btn btn-success navbar-right" asp-controller="CarBrand" asp-action="New">Yeni Marka</a>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+
+
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+
+                                <th class="column-title">Marka Adı </th>
+                                <th class="column-title">Araç Üst Kategori </th>
+                                <th class="column-title">Araç Resmi </th>
+                                <th class="column-title">İşlemler </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (CarBrand m in Model)
+                            {
+                                <tr class="even pointer">
+
+                                    <td class=" ">@m.Name</td>
+                                    <td class=" ">@(m.ParentId != null ? m.ParentBrand.Name : "Ana Marka")</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(m.PictureUrl))
+                                        {
+                                            <span>/img/carbrand/@System.IO.Path.GetFileName(m.PictureUrl)</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Resim yok</span>
+                                        }
+                                    </td>
+
+                                    
+
+
+                                    <td>
+                                        <a class="btn btn-info" asp-controller="CarBrand" asp-action="Edit" asp-route-id="@m.Id">Düzenle</a>
+                                        <a class="btn btn-danger" asp-controller="CarBrand" asp-action="Delete" asp-route-id="@m.Id">Sil</a>
+                                    </td>
+
+                                </tr>
+
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
