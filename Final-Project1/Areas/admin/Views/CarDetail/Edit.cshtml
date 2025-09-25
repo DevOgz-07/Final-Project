@@ -1,0 +1,71 @@
+﻿@model DetailVM
+@*Düzenlenecek*@
+<div class="right_col" role="main">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Marka Düzenle</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form class="form-horizontal form-label-left" asp-controller="CarDetail" asp-action="Edit" method="post" enctype="multipart/form-data">
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" asp-for="CarDetail.Id" />
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CarBrandId">Araç Markası</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" asp-for="CarDetail.CarBrandId" asp-items="@(new SelectList(Model.CarBrands, "Id", "Name", Model.CarDetail.CarBrandId))">
+                                        <option value="">Araçın Markasını Seçin</option>
+                                    </select>
+                                    <span asp-validation-for="CarDetail.CarBrandId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Mevcut Fotoğraflar</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @if (Model.CarPictures != null && Model.CarPictures.Any())
+                                    {
+                                        <div>
+                                            @foreach (var pic in Model.CarPictures)
+                                            {
+                                                <img src="@pic.ImagePath" alt="Car Image" style="width:100px; height:70px; margin-right:10px; border:1px solid #ccc; padding:2px;" />
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p>Bu araç için fotoğraf yok.</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Pictures">Fotoğraf Yükle (İsteğe Bağlı)</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="file" name="Pictures" multiple class="form-control col-md-7 col-xs-12" />
+                                    <span asp-validation-for="Pictures" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <a class="btn btn-primary" asp-controller="CarDetail" asp-action="Index">İptal</a>
+                                    <button class="btn btn-primary" type="reset">Reset</button>
+                                    <button type="submit" class="btn btn-success">Güncelle</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
