@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Final_Project1.Areas.admin.Controllers
 {
     [Area("admin")]
@@ -17,6 +18,7 @@ namespace Final_Project1.Areas.admin.Controllers
         IRepository<CarBrand> CarBrandRepo;
         IRepository<CarDetail> carDetailRepo;
         IRepository<CarImage> carImageRepo;
+        
         private readonly IFileService fileService;
         private readonly IWebHostEnvironment env;
 
@@ -42,18 +44,15 @@ namespace Final_Project1.Areas.admin.Controllers
                         .ToList();
             foreach (var item in model)
             {
-                item.CarBrand.ParentBrand = CarBrandRepo.GetBy(x => x.Id == item.CarBrand.ParentId);
+                if (item.CarBrand != null && item.CarBrand.ParentId != null)
+                {
+                    item.CarBrand.ParentBrand = CarBrandRepo.GetBy(x => x.Id == item.CarBrand.ParentId);
+                }
             }
 
             return View(model);
 
         }
-
-
-
-
-
-
         public IActionResult New()
         {
             var model = new DetailVM
@@ -64,12 +63,6 @@ namespace Final_Project1.Areas.admin.Controllers
             };
             return View(model);
         }
-
-
-
-
-
-
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> New(DetailVM model)
         {
@@ -98,12 +91,6 @@ namespace Final_Project1.Areas.admin.Controllers
 
                 return RedirectToAction("Index");
             }
-
-
-
-
-
-
             var model2 = new DetailVM
             {
                 CarBrands = CarBrandRepo.GetAll().Where(x => x.ParentId == null).ToList(),
@@ -123,43 +110,33 @@ namespace Final_Project1.Areas.admin.Controllers
         {
             return Json(CarBrandRepo.GetAll(x => x.ParentId == markaId).OrderBy(x => x.Name));
         }
-        
-        //değiştirelecek
+
         public IActionResult Edit(int id)
         {
-            
-            var carDetail = carDetailRepo.GetBy(x => x.Id == id);
-            if (carDetail == null)
-                return NotFound();
+            var detail = carDetailRepo.GetBy(x => x.Id == id);
 
-            
-            var carBrand = CarBrandRepo.GetBy(x => x.Id == carDetail.CarBrandId);
-
-            
-            carDetail.CarBrand = carBrand;
-
-            
-            DetailVM vm = new DetailVM()
+            if (detail == null)
             {
-                CarDetail = carDetail,
-                CarBrands = CarBrandRepo.GetAll(x => x.ParentId == null).OrderBy(x => x.Name),
-                ChildBrands = CarBrandRepo.GetAll(x => x.ParentId == carBrand.ParentId).OrderBy(x => x.Name),
-                CarPictures = carImageRepo.GetAll(x => x.CarDetailId == id)
+                return NotFound();
+            }
+
+            var carBrands = CarBrandRepo.GetAll(x => x.ParentId == null).ToList();
+            var childBrands = CarBrandRepo.GetAll(x => x.ParentId != null).ToList();
+
+            
+            var carPictures = carImageRepo.GetAll(x => x.CarDetailId == id).ToList();
+
+            var vm = new DetailVM
+            {
+                CarDetail = detail,
+                CarBrands = carBrands,
+                ChildBrands = childBrands,
+                CarPictures = carPictures 
             };
 
             return View(vm);
         }
-        [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Edit(DetailVM vm)
-        {
-            if (ModelState.IsValid)
-            {
-                carDetailRepo.Update(vm.CarDetail);
-                return RedirectToAction("Index");
-            }
-
-
-            return View(vm);
-        }
+        
+     
     }
 }

@@ -16,105 +16,115 @@
 
 
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" >Araç Markası</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Araç Markası</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <select class="form-control combobox"
                                         asp-items="@(new SelectList(Model.CarBrands, "Id", "Name", Model.CarDetail.CarBrandId))"
                                         onchange="GetModel(this)">
                                     <option value="">Marka Seçiniz</option>
                                 </select>
-                               
+
                             </div>
                         </div>
 
 
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" >Araç Modeli</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select class="form-control combobox selectModel"
-                                            asp-for="CarDetail.CarBrandId"
-                                           ">
-                                        <option value="">Model Seçiniz</option>
-                                    </select>
-                                </div>
-
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Araç Modeli</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="form-control combobox selectModel"
+                                        asp-for="CarDetail.CarBrandId">
+                                    <option value="">Model Seçiniz</option>
+                                </select>
                             </div>
 
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.CarKilometer">Araç Kilometre</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input asp-for="CarDetail.CarKilometer" type="number" class="form-control" />
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.CarYear">Araç Yılı</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input asp-for="CarDetail.CarYear" type="number" class="form-control" />
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.CarColor">Araç Rengi</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input asp-for="CarDetail.CarColor" class="form-control" />
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.DailyPrice">Araç Fiyatı</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input asp-for="CarDetail.DailyPrice" type="number" class="form-control" />
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.Description">Açıklama</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <textarea asp-for="CarDetail.Description" class="form-control"></textarea>
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.DisplayIndex">Görünürlük Sırası</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input asp-for="CarDetail.DisplayIndex" type="number" class="form-control" />
-
-                                </div>
-                            </div>
+                        </div>
 
 
-                            <div class="form-group">
-                                <h3>Ürün Resimleri</h3>
-                            </div>
-                            <hr />
-
-                            <div class="form-group">
-                                <label>Resimleri Seçiniz</label>
-                                <input class="form-control" type="file" name="Pictures" multiple />
-                                <small class="form-text text-muted">Birden fazla resim seçebilirsiniz</small>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.CarKilometer">Araç Kilometre</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input asp-for="CarDetail.CarKilometer" type="number" class="form-control" />
 
                             </div>
+                        </div>
 
-                            <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.CarYear">Araç Yılı</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input asp-for="CarDetail.CarYear" type="number" class="form-control" />
 
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                    <a class="btn btn-primary" asp-controller="CarDetail" asp-action="Index">İptal</a>
-                                    <button type="reset" class="btn btn-primary">Reset</button>
-                                    <button type="submit" class="btn btn-success">Ekle</button>
-                                </div>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.CarColor">Araç Rengi</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input asp-for="CarDetail.CarColor" class="form-control" />
 
-</form>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.DailyPrice">Araç Fiyatı</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input asp-for="CarDetail.DailyPrice" type="number" class="form-control" />
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.Description">Açıklama</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea class="form-control" asp-for="CarDetail.Description" id="editor1"></textarea>
+
+                                <span asp-validation-for="@Model.CarDetail.Description"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="CarDetail.DisplayIndex">Görünürlük Sırası</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input asp-for="CarDetail.DisplayIndex" type="number" class="form-control" />
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <h3>Ürün Resimleri</h3>
+                        </div>
+                        <hr />
+
+                        <div class="form-group">
+                            <label>Resimleri Seçiniz</label>
+                            <input class="form-control" type="file" name="Pictures" multiple />
+                            <small class="form-text text-muted">Birden fazla resim seçebilirsiniz</small>
+
+                        </div>
+
+                        <div class="ln_solid"></div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <a class="btn btn-primary" asp-controller="CarDetail" asp-action="Index">İptal</a>
+                                <button type="reset" class="btn btn-primary">Reset</button>
+                                <button type="submit" class="btn btn-success">Ekle</button>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="//cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor1');
+
+    $(document).ready(function () {
+        $('.combobox').select2();
+
+    });
+</script>
